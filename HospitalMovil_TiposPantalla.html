@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="https://i.imgur.com/CffQD7L.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comparador visual de tecnologías de pantalla para móviles: Dynamic AMOLED, Super AMOLED, OLED, LCD, TFT. Hospital del Móvil Zona Rosa.">
+    <meta name="keywords" content="pantalla móvil, AMOLED, OLED, LCD, TFT, reparación pantalla, Hospital del Móvil">
+    <meta name="author" content="Hospital del Móvil Zona Rosa">
+    <title>Diferencia entre Pantallas - Hospital del Móvil</title>
+    <style>
+        :root {
+            --phone-width: 340px;
+            --phone-height: 580px;
+            --phone-border-radius: 35px;
+            --main-bg-color: #f0f2f5;
+            --container-bg-color: #fff;
+            --text-color: #333;
+            --label-color: #555;
+            --primary-color: #007bff;
+            --primary-dark-color: #0056b3;
+            --whatsapp-color: #25D366;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--main-bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+        .main-container {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        header .logo {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+        }
+        header h1 {
+            font-size: 1.6em;
+            color: #1c1e21;
+            margin: 0;
+        }
+        header h2 {
+            font-size: 1em;
+            color: var(--label-color);
+            margin: 5px 0 0 0;
+            font-weight: 500;
+        }
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--whatsapp-color);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85em;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+            transition: transform 0.2s ease;
+            margin-bottom: 15px;
+        }
+        .whatsapp-button:hover {
+            transform: scale(1.05);
+        }
+        .whatsapp-button img {
+            width: 18px;
+            height: 18px;
+        }
+        .controls-container {
+            background-color: var(--container-bg-color);
+            padding: 12px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .dropdown-controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        .dropdown-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .dropdown-wrapper label {
+            margin-bottom: 8px;
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--label-color);
+            text-align: left;
+        }
+        .tech-select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f8f9fa;
+            font-size: 0.85em;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .test-controls-container {
+            margin-top: 15px;
+        }
+        .test-controls-container h3 {
+            margin: 0 0 10px 0;
+            font-size: 0.9em;
+            color: var(--label-color);
+            text-align: center;
+        }
+        .control-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        
+        /* Modern browsers with Grid support */
+        @supports (display: grid) {
+            .control-buttons {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+        }
+        
+        .control-buttons button {
+            flex: 1;
+            min-width: calc(33.333% - 6px);
+            padding: 8px 5px;
+            border: 2px solid transparent;
+            background-color: #f0f4f7;
+            border-radius: 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            color: var(--text-color);
+        }
+        .control-buttons button.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-dark-color);
+        }
+        .phone-mockup {
+            width: var(--phone-width);
+            height: var(--phone-height);
+            background: #1c1c1c;
+            border-radius: var(--phone-border-radius);
+            padding: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2), inset 0 2px 2px rgba(255,255,255,0.1);
+            position: relative;
+        }
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 6px;
+            background-color: #000;
+            border-radius: 3px;
+        }
+        .screen {
+            width: 100%;
+            height: 100%;
+            border-radius: calc(var(--phone-border-radius) - 12px);
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            background-color: #111; /* Default background */
+        }
+        .screen-half {
+            width: 50%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent; /* Allows parent background to show through */
+        }
+        .screen-half::before {
+            content: attr(data-tech-name);
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background-color: rgba(0,0,0,0.7);
+            padding: 3px 6px;
+            border-radius: 5px;
+            font-size: 0.75em;
+            font-weight: bold;
+            z-index: 10;
+            white-space: nowrap;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        .description-section {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            width: 100%;
+        }
+        .description-panel {
+            flex: 1;
+            background-color: var(--container-bg-color);
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: left;
+        }
+        .description-panel h4 {
+            margin: 0 0 8px 0;
+            font-size: 0.9em;
+            color: var(--primary-color);
+        }
+        .description-panel p {
+            margin: 0;
+            font-size: 0.75em;
+            line-height: 1.4;
+            color: #444;
+        }
+        .disclaimer {
+            font-size: 0.8em;
+            color: #856404;
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        footer .address {
+            font-size: 0.8em;
+            color: var(--label-color);
+            margin-bottom: 15px;
+        }
+        footer .address a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .footer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .footer-buttons a {
+            color: var(--primary-color);
+            background-color: #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        .footer-buttons a:hover {
+            transform: scale(1.1);
+        }
+        .footer-buttons svg {
+            width: 22px;
+            height: 22px;
+        }
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .social-buttons a {
+            color: #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease;
+        }
+        .social-buttons a:hover {
+            transform: scale(1.1);
+        }
+        .social-buttons svg {
+            width: 20px;
+            height: 20px;
+        }
+        /* Colores específicos para cada red social */
+        .social-buttons a:nth-child(1) { background-color: #1877F2; } /* Facebook */
+        .social-buttons a:nth-child(2) { background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80); } /* Instagram */
+        .social-buttons a:nth-child(3) { background-color: #000000; } /* TikTok */
+        .social-buttons a:nth-child(4) { background-color: #4285F4; } /* Google */
+
+        /* --- TEST STYLES --- */
+
+        /* Color & Mixed Bars Test (Applied to individual screen halves for continuous horizontal effect) */
+        .screen-half[data-test="colors"] {
+            background: linear-gradient(to bottom,
+                #ff0000 0%, #ff0000 16.66%,
+                #ff8800 16.66%, #ff8800 33.32%,
+                #00aaff 33.32%, #00aaff 49.98%,
+                #00ff88 49.98%, #00ff88 66.64%,
+                #ffffff 66.64%, #ffffff 83.3%,
+                #8844aa 83.3%, #8844aa 100%
+            );
+        }
+        
+        .screen-half[data-test="mixed"] {
+            background: linear-gradient(to bottom,
+                #ff0000 0%, #000000 2%, #ff0000 4%, #333333 6%, #ff0000 8%, #000000 10%, #ff0000 12%, #333333 14%, #ff0000 16.66%,
+                #ff8800 16.66%, #000000 18.66%, #ff8800 20.66%, #333333 22.66%, #ff8800 24.66%, #000000 26.66%, #ff8800 28.66%, #333333 30.66%, #ff8800 33.32%,
+                #00aaff 33.32%, #000000 35.32%, #00aaff 37.32%, #333333 39.32%, #00aaff 41.32%, #000000 43.32%, #00aaff 45.32%, #333333 47.32%, #00aaff 49.98%,
+                #00ff88 49.98%, #000000 51.98%, #00ff88 53.98%, #333333 55.98%, #00ff88 57.98%, #000000 59.98%, #00ff88 61.98%, #333333 63.98%, #00ff88 66.64%,
+                #ffffff 66.64%, #666666 68.64%, #ffffff 70.64%, #888888 72.64%, #ffffff 74.64%, #666666 76.64%, #ffffff 78.64%, #888888 80.64%, #ffffff 83.3%,
+                #8844aa 83.3%, #000000 85.3%, #8844aa 87.3%, #333333 89.3%, #8844aa 91.3%, #000000 93.3%, #8844aa 95.3%, #333333 97.3%, #8844aa 100%
+            );
+        }
+
+        /* Black Test */
+        .black-background {
+            width: 100%;
+            height: 100%;
+        }
+        .screen-half[data-tech="dynamic_amoled"] .black-background { background-color: #000000; }
+        .screen-half[data-tech="super_amoled"] .black-background { background-color: #000000; }
+        .screen-half[data-tech="amoled"] .black-background { background-color: #000000; }
+        .screen-half[data-tech="oled"] .black-background { background-color: #111111; }
+        .screen-half[data-tech="incell"] .black-background { background-color: #222222; }
+        .screen-half[data-tech="lcd"] .black-background { background-color: #333333; }
+        .screen-half[data-tech="tft"] .black-background { background-color: #444444; }
+
+        /* Technology Filters (Applied to .screen-half) */
+        .screen-half[data-tech="dynamic_amoled"] { filter: saturate(1.2) brightness(1.1) contrast(1.1); }
+        .screen-half[data-tech="super_amoled"] { filter: saturate(1.15) brightness(1.05) contrast(1.05); }
+        .screen-half[data-tech="amoled"] { filter: saturate(1.1) brightness(1.0) contrast(1.0); }
+        .screen-half[data-tech="oled"] { filter: saturate(1.05) brightness(0.98) contrast(0.98); }
+        .screen-half[data-tech="incell"] { filter: saturate(0.95) brightness(0.95) contrast(0.95); }
+        .screen-half[data-tech="lcd"] { filter: saturate(0.85) brightness(0.9) contrast(0.9); }
+        .screen-half[data-tech="tft"] { filter: saturate(0.75) brightness(0.85) contrast(0.85); }
+
+        /* Reaction Speed Test */
+        .reaction-ball {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #ffffff, #dddddd);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            animation: move-ball 3s infinite alternate ease-in-out;
+        }
+        @keyframes move-ball {
+            0% { transform: translate(-60px, -220px); }
+            100% { transform: translate(60px, 220px); }
+        }
+        .screen-half[data-tech="dynamic_amoled"] .reaction-ball { animation-duration: 2.8s; }
+        .screen-half[data-tech="super_amoled"] .reaction-ball { animation-duration: 2.9s; }
+        .screen-half[data-tech="amoled"] .reaction-ball { animation-duration: 3.0s; }
+        .screen-half[data-tech="oled"] .reaction-ball { animation-duration: 3.1s; }
+        .screen-half[data-tech="incell"] .reaction-ball { animation-duration: 3.3s; filter: blur(0.5px); }
+        .screen-half[data-tech="lcd"] .reaction-ball { animation-duration: 3.5s; filter: blur(1px); }
+        .screen-half[data-tech="tft"] .reaction-ball { animation-duration: 3.8s; filter: blur(1.5px); }
+        
+        /* Burn-in Test */
+        .burn-in-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 30%),
+                radial-gradient(circle at 70% 60%, rgba(255,255,255,0.08) 0%, transparent 25%),
+                linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%);
+            opacity: 0.6;
+        }
+        .burn-in-message {
+            color: #aaa;
+            font-size: 0.9em;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0,0,0,0.8);
+            border-radius: 8px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <img class="logo" src="https://i.imgur.com/DnV7x36.png" alt="Logo de Hospital del Móvil - Reparación de dispositivos móviles" loading="lazy" width="70" height="70">
+            <h1>Diferencia entre Pantallas</h1>
+            <h2>Hospital del Móvil Zona Rosa</h2>
+        </header>
+        <a href="https://wa.me/525578839360" class="whatsapp-button" target="_blank" rel="noopener">
+            <img src="https://i.imgur.com/PqX5wZm.png" alt="Icono de WhatsApp para contacto directo" loading="lazy" width="18" height="18">
+            Cotiza por WhatsApp
+        </a>
+        <div class="controls-container">
+            <div class="dropdown-controls">
+                <div class="dropdown-wrapper">
+                    <label for="left-tech-select">Panel Izquierdo</label>
+                    <select id="left-tech-select" class="tech-select">
+                        <option value="dynamic_amoled" selected>Dynamic AMOLED</option>
+                        <option value="super_amoled">Super AMOLED</option>
+                        <option value="amoled">AMOLED</option>
+                        <option value="oled">OLED</option>
+                        <option value="incell">In-Cell LCD</option>
+                        <option value="lcd">LCD Genérico</option>
+                        <option value="tft">TFT</option>
+                    </select>
+                </div>
+                <div class="dropdown-wrapper">
+                    <label for="right-tech-select">Panel Derecho</label>
+                    <select id="right-tech-select" class="tech-select">
+                        <option value="dynamic_amoled">Dynamic AMOLED</option>
+                        <option value="super_amoled">Super AMOLED</option>
+                        <option value="amoled">AMOLED</option>
+                        <option value="oled">OLED</option>
+                        <option value="incell" selected>In-Cell LCD</option>
+                        <option value="lcd">LCD Genérico</option>
+                        <option value="tft">TFT</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="phone-mockup">
+            <div id="screen" class="screen">
+                <div class="screen-half left-half" id="left-half"></div>
+                <div class="screen-half right-half" id="right-half"></div>
+            </div>
+        </div>
+        <div class="controls-container test-controls-container">
+            <h3>Tipo de Prueba</h3>
+            <div id="test-controls" class="control-buttons">
+                <button data-test="colors" class="active" aria-label="Prueba de colores básicos">Colores</button>
+                <button data-test="black" aria-label="Prueba de negros profundos">Negros</button>
+                <button data-test="mixed" aria-label="Prueba de patrones mixtos">Mezclados</button>
+                <button data-test="reaction" aria-label="Prueba de velocidad de respuesta">Velocidad</button>
+                <button data-test="burn-in" aria-label="Prueba de quemado de pantalla">Quemado</button>
+            </div>
+        </div>
+        <div class="disclaimer">
+            <strong>Aviso:</strong> Las diferencias pueden no apreciarse correctamente ya que están limitadas por la calidad de la pantalla con la que se esté viendo este simulador.
+        </div>
+        <div class="description-section">
+            <div class="description-panel" id="left-description"><h4></h4><p></p></div>
+            <div class="description-panel" id="right-description"><h4></h4><p></p></div>
+        </div>
+        <footer>
+            <p class="address">
+                <a href="https://www.google.com/maps/place/Hospital+del+M%C3%B3vil+Zona+Rosa/@19.4262496,-99.1661647,15z/data=!4m6!3m5!1s0x85d1ff3514937233:0x133adc222851480!8m2!3d19.4262496!4d-99.1661647!16s%2Fg%2F11b6c_vgq5?entry=ttu" target="_blank" rel="noopener">
+                    Florencia 70 Local F (esq. Liverpool), Col. Juárez, Cuauhtémoc, CDMX
+                </a>
+            </p>
+            <div class="footer-buttons">
+                <a href="tel:+525552077189" title="Llamar"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.02.75-.25 1.02l-2.2 2.2z"/></svg></a>
+                <a href="mailto:zonarosa@hospitaldelmovil.com.mx" title="Enviar correo"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+                <a href="https://www.google.com/maps/place/Hospital+del+M%C3%B3vil+Zona+Rosa/@19.4262496,-99.1661647,15z" target="_blank" rel="noopener" title="Ver en Google Maps"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></a>
+                <a href="https://www.hospitaldelmovil.com.mx" target="_blank" rel="noopener" title="Sitio Web"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H6.5C4.01 7 2 9.01 2 11.5S4.01 16 6.5 16H9v-1.9H6.5c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9.5-6H15v1.9h2.5c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1H15V16h2.5c2.49 0 4.5-2.01 4.5-4.5S19.99 7 17.5 7z"/></svg></a>
+            </div>
+            <div class="social-buttons">
+                <a href="https://www.facebook.com/hospitaldeImovil" target="_blank" rel="noopener" title="Facebook"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                <a href="https://www.instagram.com/hospitaldelmovil.mx/" target="_blank" rel="noopener" title="Instagram"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                <a href="https://www.tiktok.com/@hospitaldelmovilmx" target="_blank" rel="noopener" title="TikTok"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+                <a href="https://g.page/r/CX5yYQy_lq-eEBM/review" target="_blank" rel="noopener" title="Opinar en Google"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const techDescriptions = {
+                dynamic_amoled: { title: "Dynamic AMOLED", text: "La tecnología más avanzada de Samsung. Ofrece la mejor gama de colores (HDR10+), brillo hasta 1200 nits y contraste infinito. Reduce la luz azul dañina sin afectar los colores. Tiempo de respuesta de 1ms. Ideal para contenido multimedia y gaming." },
+                super_amoled: { title: "Super AMOLED", text: "Integra la capa táctil en la propia pantalla, haciéndola más delgada y con menos reflejos que una AMOLED estándar. Colores muy vivos, brillo hasta 1000 nits y excelente visibilidad bajo el sol. Tiempo de respuesta de 1-2ms." },
+                amoled: { title: "AMOLED", text: "Usa píxeles autoiluminados para negros perfectos y colores vibrantes. Es la base de las tecnologías más nuevas de Samsung, ofreciendo un gran rendimiento visual y eficiencia energética. Brillo hasta 800 nits, tiempo de respuesta de 2-3ms." },
+                oled: { title: "OLED", text: "Tecnología de píxeles autoiluminados similar a AMOLED. Gran contraste y colores, pero puede tener más reflejos y ser ligeramente más gruesa. Brillo hasta 600 nits. Susceptible a 'burn-in' con uso prolongado de imágenes estáticas." },
+                incell: { title: "In-Cell LCD", text: "Alta calidad de LCD, más delgado, táctil integrado pero más grueso y menor saturación de color que OLED, que al sustituirlo en un equipo puede presionar cámara y perder sensibilidad de proximidad (responsable de altavoz en whatssapp al separar de oreja, y apagar pantalla al acercar). Su backlight, enciende por completo al proyectar imagen por lo que los negros son brillosos." },
+                lcd: { title: "LCD Genérico", text: "Tecnología estándar con luz de fondo (backlight). Los negros tienen una notable fuga de luz, viéndose grisáceos. Brillo hasta 400 nits. Los colores son menos intensos y los ángulos de visión más limitados. Tiempo de respuesta de 5-8ms." },
+                tft: { title: "TFT", text: "Una de las formas más básicas y económicas de LCD. Tiene el mayor consumo de energía y los peores ángulos de visión (los colores se distorsionan al inclinarlo). Brillo hasta 300 nits. Tiempo de respuesta lento (8-16ms), puede causar 'ghosting'." }
+            };
+
+            const leftSelect = document.getElementById('left-tech-select');
+            const rightSelect = document.getElementById('right-tech-select');
+            const testControls = document.getElementById('test-controls');
+            const screen = document.getElementById('screen');
+            const leftHalf = document.getElementById('left-half');
+            const rightHalf = document.getElementById('right-half');
+            const descriptionPanels = {
+                left: document.getElementById('left-description'),
+                right: document.getElementById('right-description')
+            };
+
+            function updatePanel(side, selectElement) {
+                const selectedTech = selectElement.value;
+                const selectedName = selectElement.options[selectElement.selectedIndex].text;
+                const descriptionData = techDescriptions[selectedTech];
+                const divToUpdate = side === 'left' ? leftHalf : rightHalf;
+
+                divToUpdate.setAttribute('data-tech', selectedTech);
+                divToUpdate.setAttribute('data-tech-name', selectedName);
+                const descPanel = descriptionPanels[side];
+                descPanel.querySelector('h4').textContent = descriptionData.title;
+                descPanel.querySelector('p').textContent = descriptionData.text;
+            }
+
+            function clearAllTests() {
+                // Remove test data attributes and clear content from screen halves
+                leftHalf.removeAttribute('data-test');
+                rightHalf.removeAttribute('data-test');
+                leftHalf.innerHTML = '';
+                rightHalf.innerHTML = '';
+            }
+
+            function updateTestView(testName) {
+                clearAllTests();
+                switch(testName) {
+                    case 'colors':
+                        leftHalf.setAttribute('data-test', 'colors');
+                        rightHalf.setAttribute('data-test', 'colors');
+                        break;
+                    case 'mixed':
+                        leftHalf.setAttribute('data-test', 'mixed');
+                        rightHalf.setAttribute('data-test', 'mixed');
+                        break;
+                    case 'black':
+                        leftHalf.innerHTML = '<div class="black-background"></div>';
+                        rightHalf.innerHTML = '<div class="black-background"></div>';
+                        break;
+                    case 'reaction':
+                        leftHalf.innerHTML = '<div class="reaction-ball"></div>';
+                        rightHalf.innerHTML = '<div class="reaction-ball"></div>';
+                        break;
+                    case 'burn-in':
+                        const leftTech = leftHalf.getAttribute('data-tech');
+                        const rightTech = rightHalf.getAttribute('data-tech');
+
+                        // OLED technologies show burn-in patterns
+                        if (leftTech.includes('oled') || leftTech.includes('amoled')) {
+                            leftHalf.innerHTML = '<div class="burn-in-overlay"></div>';
+                        } else {
+                            leftHalf.innerHTML = '<div class="burn-in-message">LCD/TFT no sufre de "quemado" permanente.</div>';
+                        }
+
+                        if (rightTech.includes('oled') || rightTech.includes('amoled')) {
+                            rightHalf.innerHTML = '<div class="burn-in-overlay"></div>';
+                        } else {
+                            rightHalf.innerHTML = '<div class="burn-in-message">LCD/TFT no sufre de "quemado" permanente.</div>';
+                        }
+                        break;
+                }
+            }
+
+            // Event listeners
+            leftSelect.addEventListener('change', () => {
+                updatePanel('left', leftSelect);
+                updateTestView(testControls.querySelector('.active').dataset.test);
+            });
+
+            rightSelect.addEventListener('change', () => {
+                updatePanel('right', rightSelect);
+                updateTestView(testControls.querySelector('.active').dataset.test);
+            });
+
+            testControls.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    // Remove active class from all buttons
+                    testControls.querySelectorAll('button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    // Add active class to clicked button
+                    e.target.classList.add('active');
+                    // Update test view
+                    updateTestView(e.target.dataset.test);
+                }
+            });
+
+            // Initial setup
+            updatePanel('left', leftSelect);
+            updatePanel('right', rightSelect);
+            updateTestView('colors');
+        });
+    </script>
+</body>
+</html>
